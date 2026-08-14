@@ -6,15 +6,16 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        if not head or not head.next:    #this is to check whether the linked list is of single of no node
+        if head.next=None or head=None:
             return False
         slow=head
         fast=head
-
         while fast and fast.next:
             slow=slow.next
             fast=fast.next.next
-            if slow==fast:
+            if slow=fast:
                 return True
         return False
+
+
         
