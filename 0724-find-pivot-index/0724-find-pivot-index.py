@@ -3,7 +3,8 @@ class Solution:
         total_sum=sum(nums)
         n=len(nums)
         left_sum=0
-        for i,num in enumerate(nums):
+        for i in range(n):
+            num=nums[i]
             if left_sum==total_sum-left_sum-num:
                 return i
             left_sum+=num
