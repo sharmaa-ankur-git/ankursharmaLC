@@ -1,9 +1,21 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        
+        n=len(s)
+        left=0
+        right=n-1
         s=s.lower()
-        cleaned="".join(char for char in s if char.isalnum())
-        if cleaned==cleaned[::-1]:
-            return True
-        else:
-            return False
+        while left<right:
+            while left<right and not s[left].isalnum():
+                left+=1
+            while left<right and not s[right].isalnum():
+                right-=1
+            if s[left]==s[right]:
+                left+=1
+                right-=1
+            else:
+                return False
+        return True    
+
+
+        
+       
