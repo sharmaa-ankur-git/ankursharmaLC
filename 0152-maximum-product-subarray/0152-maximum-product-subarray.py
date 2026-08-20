@@ -1,15 +1,15 @@
-class Solution(object):
-    def maxProduct(self, nums):
-        n=len(nums)
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
         current_num=nums[0]
-        max_product=nums[0]
-        min_product=nums[0]
-        best_prod=nums[0]
+        n=len(nums)
+        current_max=nums[0]
+        current_min=nums[0]
+        max_result=nums[0]
         for i in range(1,n):
-            current_nums=nums[i]
-            current_max=max_product
-            current_min=min_product
-            min_product=min(current_max*current_nums,current_nums,current_min*current_nums)
-            max_product=max(current_max*current_nums,current_nums,current_min*current_nums)
-            best_prod=max(max_product,best_prod)
-        return best_prod
+            current_num=nums[i]
+            max_prod=max(current_max*current_num,current_num,current_min*current_num)
+            min_prod=min(current_max*current_num,current_num,current_min*current_num)
+            max_result=max(max_prod,min_prod,max_result)
+            current_max=max_prod
+            current_min=min_prod
+        return max_result
