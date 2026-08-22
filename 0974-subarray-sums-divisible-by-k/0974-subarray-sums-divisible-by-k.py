@@ -4,7 +4,8 @@ class Solution:
         totsub_count=0
         current_sum=0
         n=len(nums)
-        for num in nums:
+        for i in range(n):
+            num=nums[i]
             current_sum+=num
             remainder=current_sum%k
             totsub_count+=remainder_count.get(remainder,0)
