@@ -8,8 +8,11 @@ class Solution:
             num=nums[i]
             current_sum+=num
             remainder=current_sum%k
-            totsub_count+=remainder_count.get(remainder,0)
-            remainder_count[remainder]=remainder_count.get(remainder,0)+1
+            if remainder in remainder_count:
+                totsub_count+=remainder_count[remainder]
+                remainder_count[remainder]+=1               
+            else:
+                remainder_count[remainder]=1
         return totsub_count
             
 
