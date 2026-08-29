@@ -1,13 +1,14 @@
 class Solution:
-    def isValid(self, s: str) -> bool:   
+    def isValid(self, s: str) -> bool:
         stack = []
-        bracket_pairs = {')': '(', '}': '{', ']': '['}        
+        pairs = {'(': ')', '[': ']', '{': '}'}
+        
         for char in s:
-            if char in bracket_pairs: 
-                if not stack or stack[-1] != bracket_pairs[char]:
+            if char in pairs:  
+                stack.append(char)
+            else: 
+                if not stack or pairs[stack[-1]] != char:
                     return False
                 stack.pop()
-            else: 
-                stack.append(char)       
-        return len(stack) == 0
         
+        return not stack
