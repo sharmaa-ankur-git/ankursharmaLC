@@ -1,16 +1,13 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
-        def get_next(num:int) ->int:
-            total_sum=0
-            while num>0:
-                digit=num%10
-                total_sum+=digit**2
-                num=num//10
-            return total_sum
-        slow=n
-        fast=get_next(n)
-        while fast!=1 and fast!=slow:
-            slow=get_next(slow)
-            fast=get_next(get_next(fast))    
-        return fast==1    
+        seen = set()   
+        while n != 1 and n not in seen:
+            seen.add(n)
+            total = 0
+            while n > 0:
+                digit = n % 10
+                total += digit * digit
+                n //= 10
+            n = total   
+        return n == 1   
         
