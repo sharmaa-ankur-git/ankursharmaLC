@@ -10,10 +10,10 @@ class Solution:
             return False
         fast=head
         slow=head
-        while fast and fast.next and fast!=slow:
+        while fast and fast.next:
             slow=slow.next
             fast=fast.next.next
-            if fast.val==slow.val:
+            if fast==slow: #we don't use val here as two different values might have same value so only index
                 return True
         return False
         
