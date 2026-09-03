@@ -13,13 +13,12 @@ class Solution:
         while fast and fast.next:
             slow=slow.next
             fast=fast.next.next
-            if slow==fast:
+            if slow==fast: #the cycle has been detected
                 slow=head
-                while slow!=fast:    # (after setting the slow to head and fast being at it's last position when made to 
-                    slow=slow.next   #  move on step at time then they would meet at common point which would be the start
-                    fast=fast.next   #  of the cycle)
+                while slow!=fast:
+                    slow=slow.next
+                    fast=fast.next
                 return slow
         return None
-
 
         
