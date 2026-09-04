@@ -4,26 +4,19 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reverse(self, head):
-        prev, curr = None, head
-        while curr:
-            nxt = curr.next
-            curr.next = prev
-            prev = curr
-            curr = nxt
-        return prev
     def removeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        head = self.reverse(head)
+        stack = []
+        while head:     
+            while stack and stack[-1].val < head.val:
+                stack.pop()
+            stack.append(head)
+            head = head.next 
         dummy = ListNode(0)
         curr = dummy
-        max_so_far = float('-inf')
-        while head:
-            if head.val >= max_so_far:
-                max_so_far = head.val
-                curr.next = head
-                curr = curr.next
-            head = head.next  
-        curr.next = None 
-        return self.reverse(dummy.next)
+        for node in stack:
+            curr.next = node
+            curr = node
+        curr.next = None  
+        return dummy.next      
 
         
