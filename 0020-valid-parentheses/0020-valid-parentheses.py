@@ -1,11 +1,11 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        stack=[]
+        stack=[]                #pura khud se kiya bhai
         pairs={')':'(','}':'{',']':'['}
         for char in s:
             if char in pairs:
                 if stack and pairs[char]==stack[-1]:
-                    stack.pop()
+                    stack.pop()            
                 else:
                     return False
             else:
