@@ -9,4 +9,5 @@ class Solution:
                 low=mid+1
             else:
                 high=mid
-        return low
+        return high
+        
