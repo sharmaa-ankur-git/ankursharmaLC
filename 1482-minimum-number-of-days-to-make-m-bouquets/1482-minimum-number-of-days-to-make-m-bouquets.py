@@ -1,22 +1,28 @@
 class Solution:
     def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
-        if m * k > len(bloomDay):
+        if len(bloomDay)<m*k:
             return -1
-        def can_make(day):
-            bouquets = consecutive = 0
+        def canmake(days:int):
+            flower=0
+            bouquet=0
             for bloom in bloomDay:
-                consecutive = consecutive + 1 if bloom <= day else 0
-                if consecutive == k:
-                    bouquets += 1
-                    consecutive = 0
-                    if bouquets == m:      # early exit — no need to scan rest
-                        return True
-            return False
-        low, high = min(bloomDay), max(bloomDay)
-        while low < high:
-            mid = (low + high) // 2
-            if can_make(mid):
-                high = mid
+                if bloom<=days:
+                    flower+=1
+                    if flower==k:
+                        bouquet+=1
+                        flower=0
+                else:
+                    flower=0
+            return bouquet>=m
+        #hum binary search is used
+        left,right=min(bloomDay),max(bloomDay)
+        ans=-1
+        while left<right:
+            mid=(left+right)//2
+            if canmake(mid):
+                right=mid
             else:
-                low = mid + 1
-        return low
+                left=mid+1
+        return left
+        
+        
