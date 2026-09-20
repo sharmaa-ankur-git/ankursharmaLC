@@ -1,13 +1,8 @@
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        if len(ransomNote)>len(magazine):
-            return False          
-        counts={}
-        for ch in magazine:
-            counts[ch]=counts.get(ch,0)+1
-        for ch in ransomNote:
-            if counts.get(ch,0)<=0:
+        count = Counter(magazine)
+        for c in ransomNote:
+            if count[c] <= 0:
                 return False
-            counts[ch]-=1            
+            count[c] -= 1
         return True
-        
