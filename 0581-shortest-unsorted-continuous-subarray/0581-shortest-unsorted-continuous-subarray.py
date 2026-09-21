@@ -1,12 +1,21 @@
 class Solution:
     def findUnsortedSubarray(self, nums: list[int]) -> int:
-        sorted_nums = sorted(nums)
-        left, right = 0, len(nums) - 1
+        
+        n = len(nums)
+        start, end = -1, -2  
+        max_seen, min_seen = nums[0], nums[-1]
 
-        while left < len(nums) and nums[left] == sorted_nums[left]:
-            left += 1
-        while right > left and nums[right] == sorted_nums[right]:
-            right -= 1
+  
+        for i in range(1, n):
+            max_seen = max(max_seen, nums[i])
+            if nums[i] < max_seen:
+                end = i
 
-        return right - left + 1 if right > left else 0
+    
+        for i in range(n - 2, -1, -1):
+            min_seen = min(min_seen, nums[i])
+            if nums[i] > min_seen:
+                start = i
+
+        return end - start + 1
         
