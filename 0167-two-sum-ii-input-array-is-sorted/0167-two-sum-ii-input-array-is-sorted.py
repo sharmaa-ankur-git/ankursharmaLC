@@ -1,23 +1,14 @@
 class Solution(object):
     def twoSum(self, numbers, target):
-        """
-        :type numbers: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
-        nums=numbers
-        left=0
         n=len(numbers)
-        right=n-1
-        while left<right:
-            summ=nums[left]+nums[right]
-            if summ>target:
-                right-=1
-            elif summ<target:
-                left+=1
+        nums=numbers
+        low=0
+        high=n-1
+        while low<high:
+            if nums[high]+nums[low]>target:
+                high-=1
+            elif nums[high]+nums[low]<target:
+                low+=1
             else:
-                return [left+1,right+1]
+                return [low+1,high+1]
         return False
-
-
-
