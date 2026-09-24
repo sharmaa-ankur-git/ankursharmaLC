@@ -23,11 +23,8 @@ class Solution:
                         high-=1
                     low+=1
                     high-=1
-        result
-        seen=set()
-        res=[x for x in result if not(tuple(x) in seen or seen.add(tuple(x)))]
-        return res
-
+        return result
+        
         
         
         
