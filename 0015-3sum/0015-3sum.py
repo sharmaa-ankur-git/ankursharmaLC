@@ -4,6 +4,8 @@ class Solution:
         n=len(nums)
         result=[]
         for i in range(n-2):
+            if i>0 and nums[i]==nums[i-1]:
+                continue    #to handle outer duplicate element because they would be same 
             low=i+1
             high=n-1
             while low<high:
@@ -14,6 +16,7 @@ class Solution:
                     high-=1
                 else:
                     result.append([nums[i],nums[low],nums[high]])
+                    #below this to handle inner duplicates 
                     while low<high and nums[low]==nums[low+1]:
                         low+=1
                     while low<high and nums[high]==nums[high-1]:
