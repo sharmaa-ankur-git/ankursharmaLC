@@ -1,21 +1,19 @@
 class Solution:
     def findUnsortedSubarray(self, nums: list[int]) -> int:
         
-        n = len(nums)
-        start, end = -1, -2  
-        max_seen, min_seen = nums[0], nums[-1]
-
-  
-        for i in range(1, n):
-            max_seen = max(max_seen, nums[i])
-            if nums[i] < max_seen:
-                end = i
-
-    
-        for i in range(n - 2, -1, -1):
-            min_seen = min(min_seen, nums[i])
-            if nums[i] > min_seen:
-                start = i
-
-        return end - start + 1
-        
+        n=len(nums)
+        low=0
+        high=n-1
+        while low<high and nums[low]<=nums[low+1]:
+            low+=1
+        if low==high:
+            return 0
+        while low<high and nums[high]>=nums[high-1]:
+            high-=1
+        sub_min=min(nums[low:high+1])
+        sub_max=max(nums[low:high+1])
+        while low>0 and nums[low-1]>sub_min:
+            low-=1
+        while high<n-1 and nums[high+1]<sub_max:
+            high+=1
+        return high-low+1
