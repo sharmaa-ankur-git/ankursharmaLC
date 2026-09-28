@@ -1,22 +1,16 @@
 class Solution:
     def longestOnes(self, nums: List[int], k: int) -> int:
-        z_count=0
-        low=0
         n=len(nums)
+        low=0
         longest=0
+        hash={0:0}
         for high in range(n):
-            if nums[high]==1:
-                pass
-            elif nums[high]==0:
-                z_count+=1
-                while z_count>k:
-                    if nums[low]==0:
-                        z_count-=1
-                    low+=1
-            window_len=high-low+1
-            longest=max(window_len,longest)
+            bd=nums[high]
+            hash[bd]=hash.get(bd,0)+1
+            while hash[0]>k:
+                hash[nums[low]]-=1
+                low+=1            
+            longest=max(longest,high-low+1)
         return longest
-        
-
 
 
