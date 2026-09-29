@@ -1,48 +1,48 @@
-from collections import Counter
-
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        if not t or not s:
+        if not s or not t or len(s) < len(t):
             return ""
 
-        # Frequency map for string t
-        target_counts = Counter(t)
-        window_counts = {}
+        # Step 1: Frequency map of target string t
+        t_dict = {}
+        for char in t:
+            t_dict[char] = t_dict.get(char, 0) + 1
 
-        have, need = 0, len(target_counts)
-        res, res_len = [-1, -1], float("inf")
-        left = 0
+        required = len(t_dict)  # Number of unique characters to satisfy
+        formed = 0              # Number of unique characters currently satisfied
 
-        for right, char in enumerate(s):
-            window_counts[char] = window_counts.get(char, 0) + 1
+        # Window state tracking
+        s_map = {}
+        low = 0
+        min_len = float("inf")
+        best_window = (0, 0)    # Stores (start, end) indices
 
-            # Check if current character satisfies required count
-            if char in target_counts and window_counts[char] == target_counts[char]:
-                have += 1
+        # Step 2: Expand window with the high pointer
+        for high in range(len(s)):
+            char = s[high]
+            s_map[char] = s_map.get(char, 0) + 1
 
-            # Shrink window from the left while it remains valid
-            while have == need:
-                # Update best result
-                window_size = right - left + 1
-                if window_size < res_len:
-                    res = [left, right]
-                    res_len = window_size
+            # Check if this character has satisfied its target frequency
+            if char in t_dict and s_map[char] == t_dict[char]:
+                formed += 1
 
-                # Remove the left character
-                left_char = s[left]
-                window_counts[left_char] -= 1
-                if left_char in target_counts and window_counts[left_char] < target_counts[left_char]:
-                    have -= 1
-                left += 1
+            # Step 3: Contract window while it contains all target characters
+            while formed == required:
+                # Update smallest window found so far
+                current_len = high - low + 1
+                if current_len < min_len:
+                    min_len = current_len
+                    best_window = (low, high)
 
-        l, r = res
-        return s[l : r + 1] if res_len != float("inf") else ""
-                
-            
-            
-            
+                # Remove the leftmost character from the window
+                left_char = s[low]
+                s_map[left_char] -= 1
 
+                # If dropping left_char breaks the required count, lose the milestone
+                if left_char in t_dict and s_map[left_char] < t_dict[left_char]:
+                    formed -= 1
 
-        
+                low += 1
 
-        
+        # If min_len never updated, no valid substring exists
+        return "" if min_len == float("inf") else s[best_window[0] : best_window[1] + 1]
