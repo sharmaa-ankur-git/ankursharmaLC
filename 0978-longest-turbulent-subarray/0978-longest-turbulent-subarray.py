@@ -4,17 +4,17 @@ class Solution:
         if n<2:
             return n
         max_len=1
-        current_len=1
-        prev_diff=0 
+        curr_len=1
+        prev_diff=0
         for i in range(1,n):
             curr_diff=arr[i]-arr[i-1]
             if curr_diff==0:
-                current_len=1
-            elif (curr_diff>0 and prev_diff<0) or (curr_diff<0 and prev_diff>0):
-                current_len+=1
+                curr_len=1
+            elif (prev_diff>0 and curr_diff<0) or (prev_diff<0 and curr_diff>0):
+                curr_len+=1
             else:
-                current_len=2
-            max_len=max(max_len,current_len)
+                curr_len=2
+            max_len=max(max_len,curr_len)
             prev_diff=curr_diff
         return max_len
-    
+        
