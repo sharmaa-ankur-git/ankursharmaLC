@@ -4,17 +4,16 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def getDecimalValue(self, head: Optional[ListNode]) -> int:
-        if head is None:
-            return False
-        bi=[]
-        while head is not None:
-            bi.append(head.val)
+    def getDecimalValue(self, head: ListNode | None) -> int:
+        val_list=[]
+        while head!=None:
+            val_list.append(head.val)
             head=head.next
-        bi=bi[::-1]
-        sum=0
-        n=len(bi)
-        for i in range(n):
-            sum+=bi[i]*2**i
-        return sum
+        result=0
+        for i in range(len(val_list)):
+            result+=(2**(len(val_list)-1-i)) * val_list[i]
+        return result
 
+
+
+        
