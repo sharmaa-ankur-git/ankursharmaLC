@@ -5,19 +5,10 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        pairs=[]
+        seen={}
         for i,num in enumerate(nums):
-            pairs.append([num,i])
-        pairs.sort()
-        n=len(pairs)
-        right,left=n-1,0
-        while left<right:
-            summ=pairs[left][0]+pairs[right][0]
-            if summ>target:
-                right-=1
-            elif summ<target:
-                left+=1
-            else:
-                return [pairs[left][1],pairs[right][1]]
+            req=target-num
+            if req in seen:
+                return [seen[req],i]
+            seen[num]=i
         return []
-        
