@@ -2,21 +2,13 @@ class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
         intervals.append(newInterval)
         intervals.sort(key=lambda x:x[0])
-        merged=True
-        while merged:
-            merged=False
-            for i in range(1,len(intervals)):
-                if intervals[i-1][1]>=intervals[i][0]:
-                    start=intervals[i-1][0]
-                    end=max(intervals[i][1],intervals[i-1][1])
-                    new_interval=[start,end]
-                    intervals.pop(i)
-                    intervals.pop(i-1)
-                    intervals.insert(i-1,new_interval)
-                    intervals.sort(key=lambda x:x[0])
-                    merged=True
-                    break
-                else:
-                    continue
-        return intervals
+        final=[intervals[0]]
+        n=len(intervals)
+        for i in range(1,n):
+            if final[-1][1]>=intervals[i][0]:
+                prev=final.pop()
+                final.append([prev[0],max(intervals[i][1],prev[1])])
+            else:
+                final.append(intervals[i])
+        return final
         
