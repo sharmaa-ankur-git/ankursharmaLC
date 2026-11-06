@@ -1,15 +1,14 @@
+from collections import Counter
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s)!=len(t):
             return False
-        n=len(s)
-        track={}
-        
-        for char in s:
-            track[char]=track.get(char,0)+1
-        for char in t:
-            track[char]=track.get(char,0)-1
-            if track[char]<0:
+        s_freq=Counter(s)
+        for ch in t:
+            if ch in s_freq:
+                s_freq[ch]-=1
+                if s_freq[ch]==0:
+                    del s_freq[ch]
+            else:
                 return False
-        return True
-        
+        return False if s_freq else True
