@@ -1,11 +1,14 @@
 class Solution:
-    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+    def nextGreaterElement(self, nums1: list[int], nums2: list[int]) -> list[int]:
+        nex_grea={}  #dict to store next greater element for the particular element
         stack=[]
-        nxt_greater={}
-        for num in nums2:
-            while stack and num>stack[-1]:
-                smaller=stack.pop()
-                nxt_greater[smaller]=num
+        for num in nums2[::-1]:
+            while stack and stack[-1]<=num:
+                stack.pop()
+            if stack:
+                nex_grea[num]=stack[-1]
+            else:
+                nex_grea[num]=-1
             stack.append(num)
-        return [nxt_greater.get(x, -1) for x in nums1]
+        return [nex_grea[num] for num in nums1]
         
