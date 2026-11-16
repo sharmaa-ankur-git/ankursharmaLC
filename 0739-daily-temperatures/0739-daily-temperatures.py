@@ -1,16 +1,16 @@
 class Solution:
-    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+    def dailyTemperatures(self, temperatures: list[int]) -> list[int]:
         n=len(temperatures)
         stack=[]
-        result=[0]*n
-        t=temperatures
+        nextwarmdaycount={}
         for i in range(n-1,-1,-1):
-            while stack and t[stack[-1]]<=t[i]:
-                stack.pop()
-            if stack:
-                result[i]=abs(i-stack[-1])
-            stack.append(i)
-        return result
-
+            temp=temperatures[i]
+            days=1
+            while stack and stack[-1][0]<=temp:
+                prev_temp,prev_days=stack.pop()
+                days+=prev_days
+            nextwarmdaycount[i]= days if stack else 0
+            stack.append((temp,days))
+        return [nextwarmdaycount[i] for i in range(n)]
 
         
