@@ -2,15 +2,13 @@ class Solution:
     def nextGreaterElements(self, nums: List[int]) -> List[int]:
         n=len(nums)
         stack=[]
-        result=[-1]*n
-
+        result=[0]*n
         for i in range(2*n-1,-1,-1):
             num=nums[i%n]
             while stack and stack[-1]<=num:
                 stack.pop()
             if i<n:
-                if stack:
-                    result[i]=stack[-1]
+                result[i]=stack[-1] if stack else -1
             stack.append(num)
         return result
             
