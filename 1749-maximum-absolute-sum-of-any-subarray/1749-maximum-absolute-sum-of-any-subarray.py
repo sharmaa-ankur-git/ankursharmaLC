@@ -14,9 +14,10 @@ class Solution:
             currentmsum=min(current_num,current_num+currentmsum)
             max_sum=max(currentMsum,max_sum)
             min_sum=min(currentmsum,min_sum) 
-            result=max(max_sum,abs(min_sum),result)          
+            result=max(abs(max_sum),abs(min_sum),result)          
         return result
         
 
 
+        
         
