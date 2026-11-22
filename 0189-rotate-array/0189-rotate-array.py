@@ -5,7 +5,7 @@ class Solution:
         """
         n=len(nums)
         k=k%n
-        f_port=nums[0:n-k]
-        l_port=nums[n-k:]
-        nums[:]=l_port+f_port
+        numl=nums[::-1]
+        numl=numl[:k][::-1]+numl[k:][::-1]
+        nums[:]=numl
         
