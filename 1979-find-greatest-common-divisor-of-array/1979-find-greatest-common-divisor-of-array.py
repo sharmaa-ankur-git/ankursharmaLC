@@ -2,7 +2,8 @@ class Solution:
     def findGCD(self, nums: list[int]) -> int:
         mx=max(nums)
         mn=min(nums)
-        while mn!=0:
+        def hcf(mx,mn):
+            if mn==0: return mx
             mx,mn=mn,mx%mn
-        return mx
-        
+            return hcf(mx,mn)
+        return hcf(mx,mn)
